@@ -7,19 +7,26 @@ app = Flask(__name__)
 def emo_detector():
     text_to_analyze = request.args.get('textToAnalyze')
     response = emotion_detector(text_to_analyze)
+    try:
+        status_code = response['status_code']
+    except:
+        status_code = 500
 
-    if response and response['status_code'] == 200:
+    if response and status_code == 200:
         try:
             response.pop('status_code', None)
         except:
             pass
-        return response
-    else:
-        try:
-            status_code = response['status_code']
-        except:
-            status_code = 500
 
+        anger = response['anger']
+        disgust = response['disgust']
+        fear = response['fear']
+        joy =response['joy']
+        sadness = response['sadness']
+        dom = response['dominant_emotion'].upper()
+
+        return f"'anger': {anger}, 'disgust': {disgust}, 'fear': {fear}, 'joy': {joy}, 'sadness': {sadness}. The dominant emotion is <b>{dom}</b>."
+    else:        
         return f"The text provided is invalid. Status code = {status_code}"
 
 @app.route("/")
