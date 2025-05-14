@@ -1,4 +1,5 @@
 let RunSentimentAnalysis = ()=>{
+    document.getElementById("system_response").innerHTML = 'Processing ...';
     textToAnalyze = document.getElementById("textToAnalyze").value;
 
     let xhttp = new XMLHttpRequest();

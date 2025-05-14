@@ -9,9 +9,11 @@ def emo_detector():
     response = emotion_detector(text_to_analyze)
     try:
         status_code = response['status_code']
+        if response['dominant_emotion'] is None:
+            return "Invalid text! Please try again!"
     except:
         status_code = 500
-
+    
     if response and status_code == 200:
         try:
             response.pop('status_code', None)
@@ -23,7 +25,7 @@ def emo_detector():
         fear = response['fear']
         joy =response['joy']
         sadness = response['sadness']
-        dom = response['dominant_emotion'].upper()
+        dom = response['dominant_emotion']
 
         return f"'anger': {anger}, 'disgust': {disgust}, 'fear': {fear}, 'joy': {joy}, 'sadness': {sadness}. The dominant emotion is <b>{dom}</b>."
     else:        
