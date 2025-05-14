@@ -41,12 +41,13 @@ def emotion_detector(text_to_analyze):
         anger_score, disgust_score, fear_score, joy_score, sadness_score, dominant_emotion = None, None, None, None, None, None
 
     return  {
-                'anger': anger_score,
-                'disgust': disgust_score,
-                'fear': fear_score,
-                'joy': joy_score,
-                'sadness': sadness_score,
-                'dominant_emotion': dominant_emotion
+                'anger'         : anger_score,
+                'disgust'       : disgust_score,
+                'fear'          : fear_score,
+                'joy'           : joy_score,
+                'sadness'       : sadness_score,
+                'dominant_emotion': dominant_emotion,
+                'status_code'   : status_code
             }
 
         # dict_response =json.loads(response.text)
