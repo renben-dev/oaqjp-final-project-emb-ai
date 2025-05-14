@@ -21,26 +21,17 @@ def emo_detector():
         status_code = response['status_code']
         if response['dominant_emotion'] is None:
             return "Invalid text! Please try again!"
-    except ValueError as e:
-        print(f"ValueError occurred: {e}")
-    except TypeError as e:
-        print(f"TypeError occurred: {e}")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+    except Exception as e: # pylint: disable=broad-exception-caught
+        return f"An unexpected error occurred: {e}"
 
     if response and status_code == 200:
-        try:
-            response.pop('status_code', None)
-        except:
-            pass
-
+        response.pop('status_code', None)
         anger = response['anger']
         disgust = response['disgust']
         fear = response['fear']
         joy =response['joy']
         sadness = response['sadness']
         dom = response['dominant_emotion']
-
         return (f"'anger': {anger}, 'disgust': {disgust}, 'fear': {fear}, "
                 f"'joy': {joy}, 'sadness': {sadness}. The dominant emotion is <b>{dom}</b>."
         )
